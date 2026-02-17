@@ -66,7 +66,7 @@
 
 % --- 用于控制【项目标题】与下方【项目描述】的距离 ---
 \newlength{\intraProjectTitleSep}
-\setlength{\intraProjectTitleSep}{0.4em} % <--- 在此调整标题和描述的距离
+\setlength{\intraProjectTitleSep}{0.2em} % <--- 在此调整标题和描述的距离
 \newcommand{\titlebreak}{\\[\intraProjectTitleSep]}
 
 % --- 用于控制【项目描述】与下方【要点列表】的距离 ---
@@ -89,9 +89,6 @@
 \pagenumbering{gobble}
 
 %%%% 利用tikz来定位照片
-\begin{tikzpicture}[remember picture, overlay] 
-    \node[anchor = north east] at ($(current page.north east)+(-2cm,-1.2cm)$) {\includegraphics[height=3cm]{avatar.jpg}};
-  \end{tikzpicture}%
   %%%% 利用tikz来定位学校Logo，这里只在第一页显示
   \begin{tikzpicture}[remember picture, overlay] 
     \node[anchor = north west] at ($(current page.north west)+(0.5cm,+1.0cm)$) {\includegraphics[height=6cm]{zju.png}};
@@ -119,13 +116,13 @@
 
 % --- 第一个项目 ---
 % 将标题行末尾的 \\ 替换为 \titlebreak 命令
-\textbf{基于Mediapipe的石头剪刀布联机对战} \hfill 2024.05 -- 2024.06 \titlebreak
-项目描述：在技术博客上刷到mediapipe的用法后产生兴趣，遂利用周末的时间断断续续地完成了这个项目,主要利用了mediapipe预训练的神经网络做了手势识别。
+\textbf{基于Mediapipe的猜拳游戏} \hfill 2024.05 -- 2024.06 \titlebreak
+项目描述：项目灵感来源于高中时看到的一篇介绍mediapipe的技术博客。项目主要利用周末时间完成，在实现手势识别的基础上，又尝试增加了简易UI和联网功能，也是我对个人兴趣的初步探索。
 % 在 itemize 的选项中，使用 topsep=\intraProjectListTopSep 来控制上边距
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{数据采集}：运用 \textbf{Go} 语言及 \textbf{GORM} 框架，实现对全站“烂坑”帖的7x24小时全天候\textbf{抓取}与\textbf{入库}(MySQL)。
-    \item \textbf{可视化UI}：采用原生 \textbf{HTML/CSS/JS} 构建了“烂坑”实时监控\textbf{作战大屏}。实现了坑主成分分析、挖坑热力图、年度烂坑王榜单等\textbf{可视化图表}，并通过 \textbf{AJAX} 异步刷新，确保数据洞察的实时性。
-    \item \textbf{核心产出}：全面掌握了从\textbf{数据采集、清洗、LLM标注到可视化分析}的“反烂坑”全链路技术。
+    \item \textbf{数据采集}： \textbf{openCV} 提供了高度封装的视频流采集和转换功能，用笔记本的原生摄像头即可完成图像采集。
+    \item \textbf{手势识别}： \textbf{Mediapipe}提供了预训练好的模型，将图像格式简单转换后传入推理框架即可进行推理。\textbf{Mediapipe}会识别并输出一组坐标，对应手部各个"关键点"在图像中的位置。项目在一开始初步实现了手势判断逻辑。后续针对识别稳定性和手部大小不同的问题分别作了连续帧投票和手掌比例归一化的优化，在实际测试中表现较好。
+    \item \textbf{UI和联网功能}：利用\textbf{Gradio}实现UI，\textbf{Flask}实现联网。二者都高度封装，即插即用，为项目提供轻量化实现。
 \end{itemize}
 
 % 使用 \projectsep 命令来分隔两个项目
