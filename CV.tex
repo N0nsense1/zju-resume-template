@@ -2,7 +2,6 @@
 
 \setlength{\parindent}{0pt}
 
-% ================= 基础宏包 =================
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 \usepackage{url}
@@ -29,7 +28,7 @@
     nohead
 ]{geometry}
 
-% ================= 中英文排版统一 =================
+% ===== 中英文排版统一 =====
 \xeCJKsetup{
     CJKecglue = {},
     PunctStyle = plain,
@@ -37,7 +36,7 @@
 }
 \punctstyle{plain}
 
-% ================= 字体设置（完全保持原样） =================
+% ===== 字体（保持原设置）=====
 \setmainfont[
     Path = fonts/Main/,
     Extension = .otf,
@@ -50,15 +49,13 @@
     BoldFont = NotoSansSC-Bold.ttf,
 ]{NotoSansSC-Regular.ttf}
 
-% ================= 行距 =================
 \renewcommand{\baselinestretch}{1.5}
 
-% ================= 列表间距 =================
 \setlist{noitemsep}
 \setlist[itemize]{topsep=0.25em, leftmargin=*}
 \setlist[enumerate]{topsep=0.25em, leftmargin=*}
 
-% ================= 项目间距控制 =================
+% ===== 项目间距 =====
 \newlength{\interProjectSpacing}
 \setlength{\interProjectSpacing}{0.9em}
 \newcommand{\projectsep}{\vspace{\interProjectSpacing}}
@@ -70,19 +67,20 @@
 \newlength{\intraProjectListTopSep}
 \setlength{\intraProjectListTopSep}{0.2em}
 
-% ================= Section 样式 =================
+% ===== Section 样式 =====
 \titleformat{\section}
 {\large\bfseries\raggedright}
 {}{0em}{}
 [{\color{CVBlue}\titlerule}]
 \titlespacing*{\section}{0cm}{*1.6}{*1.2}
 
-% 安全 section 包装（不改变标题文字）
+% ===== 安全 section 包装（不改标题文字）=====
 \newcommand{\safeSection}[1]{
 \section{\texorpdfstring{#1}{\detokenize{#1}}}
 }
 
 % =======================================================================
+
 \begin{document}
 \pagenumbering{gobble}
 
