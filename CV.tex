@@ -1,7 +1,8 @@
 \documentclass[11pt]{article}
 
-\setlength{\parindent}{0pt}
 
+\setlength{\parindent}{0pt}
+\usepackage{xltxtra}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 \usepackage{url}
@@ -13,12 +14,33 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usepackage{fontspec}
-\usepackage[AutoFakeBold=false,AutoFakeSlant=false]{xeCJK}
+\usepackage{xeCJK}
 \usepackage{enumitem}
+\CJKsetecglue{} %% 取消中文与数字之间的间隙
+
+
+%% 主文档字体设置
+\setmainfont[
+    Path = fonts/Main/,
+    Extension = .otf,
+    BoldFont = texgyretermes-bold.otf, % 加粗字体
+]{texgyretermes-regular.otf} % 正文字体
+
+% 中文字体设置
+\setCJKmainfont[
+    Path = fonts/hansans/,
+    Extension = .ttf,
+    BoldFont = NotoSansSC-Bold.ttf, % 加粗字体
+]{NotoSansSC-Regular.otf} % 正文字体
+
+
 \usepackage{relsize}
 \usepackage{xspace}
-\usepackage{fontawesome}
-\usepackage{titlesec}
+
+% 使用 fontawesome（部分图标）
+\usepackage{fontawesome} 
+
+% A4纸，上下左右边距
 \usepackage[
     a4paper,
     left=1.2cm,
@@ -28,123 +50,106 @@
     nohead
 ]{geometry}
 
-% ===== 中英文排版统一 =====
-\xeCJKsetup{
-    CJKecglue = {},
-    PunctStyle = plain,
-    CheckSingle = true
-}
-\punctstyle{plain}
+\renewcommand{\baselinestretch}{1.5} % 行间距设为1.5
 
-% ===== 字体（保持原设置）=====
-\setmainfont[
-    Path = fonts/Main/,
-    Extension = .otf,
-    BoldFont = texgyretermes-bold.otf,
-]{texgyretermes-regular.otf}
-
-\setCJKmainfont[
-    Path = fonts/hansans/,
-    Extension = .ttf,
-    BoldFont = NotoSansSC-Bold.ttf,
-]{NotoSansSC-Regular.ttf}
-
-\renewcommand{\baselinestretch}{1.5}
-
-\setlist{noitemsep}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\setlist{noitemsep} % 取消列表项间的额外间距
+%\setlist{nosep} % 取消所有垂直间距
 \setlist[itemize]{topsep=0.25em, leftmargin=*}
 \setlist[enumerate]{topsep=0.25em, leftmargin=*}
 
-% ===== 项目间距 =====
+% --- 用于控制【不同项目之间】的垂直距离 ---
 \newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.9em}
+\setlength{\interProjectSpacing}{0.9em} % <--- 在此调整项目之间的距离
 \newcommand{\projectsep}{\vspace{\interProjectSpacing}}
 
+% --- 用于控制【项目标题】与下方【项目描述】的距离 ---
 \newlength{\intraProjectTitleSep}
-\setlength{\intraProjectTitleSep}{0.2em}
+\setlength{\intraProjectTitleSep}{0.4em} % <--- 在此调整标题和描述的距离
 \newcommand{\titlebreak}{\\[\intraProjectTitleSep]}
 
+% --- 用于控制【项目描述】与下方【要点列表】的距离 ---
 \newlength{\intraProjectListTopSep}
-\setlength{\intraProjectListTopSep}{0.2em}
-
-% ===== Section 样式 =====
-\titleformat{\section}
-{\large\bfseries\raggedright}
-{}{0em}{}
-[{\color{CVBlue}\titlerule}]
-\titlespacing*{\section}{0cm}{*1.6}{*1.2}
-
-% ===== 安全 section 包装（不改标题文字）=====
-\newcommand{\safeSection}[1]{
-\section{\texorpdfstring{#1}{\detokenize{#1}}}
-}
+\setlength{\intraProjectListTopSep}{0.2em} % <--- 在此调整描述和列表的距离
 
 % =======================================================================
+
+
+\titleformat{\section}         % 定制 \section 命令 
+{\large\bfseries\raggedright} % 将 section 标题设置为大号、粗体且左对齐
+{}{0em}                      % 可用于为所有 section 添加前缀（如“章节...”）
+{}                           % 可用于在标题前插入代码
+[{\color{CVBlue}\titlerule}]  % 在标题后插入一条横线
+\titlespacing*{\section}{0cm}{*1.6}{*1.2}
+
+
 
 \begin{document}
 \pagenumbering{gobble}
 
 %%%% 利用tikz来定位照片
-%%%% 利用tikz来定位学校Logo，这里只在第一页显示
 \begin{tikzpicture}[remember picture, overlay] 
+    \node[anchor = north east] at ($(current page.north east)+(-2cm,-1.2cm)$) {\includegraphics[height=3cm]{avatar.jpg}};
+  \end{tikzpicture}%
+  %%%% 利用tikz来定位学校Logo，这里只在第一页显示
+  \begin{tikzpicture}[remember picture, overlay] 
     \node[anchor = north west] at ($(current page.north west)+(0.5cm,+1.0cm)$) {\includegraphics[height=6cm]{zju.png}};
-\end{tikzpicture}%
+  \end{tikzpicture}%
+\centerline{\LARGE\bfseries{胡豆}} 
 
-\centerline{\LARGE\bfseries{徐一啸}}
-\centerline{\normalsize{\faIdCard\ 学号：3230100000}}
+\centerline{\normalsize{\faPhone\ 111-1111-1111 \quad \faEnvelopeO\ \href{mailto:3230100000@zju.edu.cn}{3230100000@zju.edu.cn}}} 
+
+\centerline{\normalsize{\faGithubSquare\ \href{https://github.com/maksymilan}{https://github.com/maksymilan} \quad \faRssSquare\ \href{https://maksymilan.github.io/}{https://maksymilan.github.io}}} 
     
-\safeSection{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育背景}    
-
-\textbf{浙江大学} \hfill 2025.9 -- 至今\\[0.2em]
-大一\quad GPA:4.45
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育背景}    
+\textbf{浙江大学} \hfill 2023.9 -- 至今\\[0.5em] % 标题和正文间加一点距离
+CC98烂坑挖掘工程与技术\quad 大二 
 \begin{itemize}[nosep]
-    \item 现浙江大学超算队(ZJUSCT)成员
+    \item 相关课程：《烂坑挖掘及基础》、《高级挖坑技巧》、《烂坑数理统计》
 \end{itemize}
 
-\projectsep
-
-\textbf{浙江省杭州第二中学} \hfill 2022.9 -- 2025.6\\[0.2em]
-2022级13班(竞赛班)毕业生\quad
-\begin{itemize}[nosep]
-    \item 曾任校学生会干部
-\end{itemize}
-
-\safeSection{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历(部分)}
+\section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历}
 
 % --- 第一个项目 ---
-\textbf{基于Mediapipe的猜拳游戏} \hfill 2024.05 -- 2024.06 \titlebreak
-项目描述：项目灵感来源于高中时看到的一篇介绍 mediapipe 的技术博客。项目主要利用周末时间完成，在实现手势识别的基础上，又尝试增加了简易 UI 和联网功能，也是我对个人兴趣的初步探索。
+% 将标题行末尾的 \\ 替换为 \titlebreak 命令
+\textbf{98烂坑风控与可视化作战平台} \hfill 2024.08 -- 至今 \titlebreak
+项目描述：为维护cc98社区的讨论纯度、净化“心灵之约”版块风气，本项目旨在对“烂坑”进行科学、严谨的量化分析，并引入\textbf{大语言模型(LLM)}对烂坑帖进行\textbf{自动化情感极性与“离谱指数”标注}。
+% 在 itemize 的选项中，使用 topsep=\intraProjectListTopSep 来控制上边距
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{数据采集}: \textbf{openCV} 提供了高度封装的视频流采集和转换功能，用笔记本的原生摄像头即可完成图像采集。
-    \item \textbf{手势识别}: \textbf{Mediapipe} 提供了预训练好的模型，将图像格式简单转换后传入推理框架即可进行推理。\textbf{Mediapipe} 会识别并输出一组坐标，对应手部各个“关键点”在图像中的位置。项目在一开始初步实现了手势判断逻辑。后续针对识别稳定性和手部大小不同的问题分别作了连续帧投票和手掌比例归一化的优化，在实际测试中表现较好。
-    \item \textbf{UI和联网功能}: 利用 \textbf{Gradio} 实现 UI，\textbf{Flask} 实现联网。二者都高度封装，即插即用，为项目提供轻量化实现。
+    \item \textbf{数据与后端}：运用 \textbf{Go} 语言及 \textbf{GORM} 框架，实现对全站“烂坑”帖的7x24小时全天候\textbf{抓取}与\textbf{入库}(MySQL)。
+    \item \textbf{可视化前端}：采用原生 \textbf{HTML/CSS/JS} 构建了“烂坑”实时监控\textbf{作战大屏}。实现了坑主成分分析、挖坑热力图、年度烂坑王榜单等\textbf{可视化图表}，并通过 \textbf{AJAX} 异步刷新，确保数据洞察的实时性。
+    \item \textbf{核心产出}：全面掌握了从\textbf{数据采集、清洗、LLM标注到可视化分析}的“反烂坑”全链路技术。
 \end{itemize}
 
+% 使用 \projectsep 命令来分隔两个项目
 \projectsep
 
 % --- 第二个项目 ---
-\textbf{磁性计算体系优化} \hfill 2025.12 -- 至今 \titlebreak
-项目描述：复旦大学计算物质研究所与 ZJUSCT 的合作项目。主要目标是对目前主流的分子动力学模拟推理框架 nequip 和 allegro 进行科学计算优化和修改，解决大规模磁性原子体系的“维度危机”。我和另一位超算队同学作为主要的参与者负责了目前为止绝大部分的分析和优化工作，并在学期和寒假通过线上会议的形式对接进度和困难点。
+\textbf{AIGC驱动的超进化自动挖坑机 (Agent)} \hfill 2025.02 -- 至今 \titlebreak
+项目描述：为探索心灵版规的边界，以及测试版主锁沉反应速度的极限，本项目基于\textbf{多智能体协作(MCP)与LLM}技术，开发了一款能\textbf{自主“挖坑”与“互坑”}的AI Agent。
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{环境配置}: 通过 SSH 远程连接校内主机，并用 docker 构建并运行容器。自己修改 makefile 以解决不同依赖之间的版本兼容性问题。
-    \item \textbf{程序热点分析}: 通过 deepwiki 实现对各模块功能的浏览，梳理模型结构并挖掘并行性。使用 torch profiler 进行耗时分析。
-    \item \textbf{优化尝试}: 调用开源项目的代码，针对矩阵稀疏性和内存传输开销问题采取稀疏计算优化和内核融合操作。尝试在模型推理的关键步骤上用 openMPI 做并行。
+    \item \textbf{并发与调度}：后端采用 \textbf{Go} 语言，充分利用 \textbf{Goroutine} 和 \textbf{Channel} 的高并发模型，模拟\textbf{用户并发在线}，执行定时挖坑，确保挖坑行动的\textbf{隐蔽性}与\textbf{高效性}。
+    \item \textbf{实时监控与响应}：运用 \textbf{WebSocket} 协议实现了对目标帖子的\textbf{实时监听与交互}。确保在烂坑被识破的第一时间，Agent能光速完成\textbf{“lktp”}或\textbf{反向钓鱼}操作，展现出极高的AI博弈能力。
+    \item \textbf{可视化GUI}：前端使用 \textbf{React} 框架构建了\textbf{后台管理的可视化面板 (Admin Panel)}。可一键下达挖坑指令、动态调整Agent的\textbf{指令}、并实时监控数据。
 \end{itemize}
 
-\safeSection{\makebox[\widthof{\faInfo}][c]{\color{CVBlue}\faInfo}\ 个人优势}
-
+\section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 技术栈}
 \begin{itemize}[nosep]
-    \item \textbf{自主学习意识和能力}: 通过 d2l 自学图像训练数据处理，在 SJTU 夏令营的 ai 开发赛道中负责数据处理和预训练，带领团队获奖；自学基本开发工具和高性能计算知识，参与 HPC 校赛并获奖，通过面试遴选进入 ZJUSCT；寒假时自学代理软件配置知识，解决校网和科学上网工具冲突；假期通过 MIT opencourse 学习算法和数理基础知识，同时补全自己的英语术语库。
-    \item \textbf{在生活中独立解决 CS 相关问题}: 主动关注硬件市场动态，研究硬件配置；主动装过机，平时会对笔记本清灰、涂硅脂；在使用过程中有意识地积累和运用有意思的工具，优化电脑整体性能。
-    \item \textbf{保持好奇和自我更新}: 有定期阅读技术博客的习惯；平时喜欢听业界学界人物的访谈播客，了解前沿理论和工业界进展，对新知识新想法保持开放和持续学习的态度。
+    \item \textbf{编程语言：} \textbf{Go}, Python, C++
+    \item \textbf{开发工具：} SSH, Git, Vim, MakeFile,LaTex
+    \item \textbf{操作系统：} Linux
 \end{itemize}
-
-\safeSection{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 技术栈}
-
-\begin{itemize}[nosep]
-    \item \textbf{编程语言}: Python, C++, C
-    \item \textbf{开发工具}: Git, SSH, Conda, GNUmake, Cmake
-    \item \textbf{操作系统}: Linux (fish shell)
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faList}\ 获奖情况}
+\begin{itemize}
+    \item CC98年度用户 \hfill 2023.12
+    
 \end{itemize}
-
+    
+\section{\makebox[\widthof{\faInfo}][c]{\color{CVBlue}\faInfo}\ 其他}
+\begin{itemize}[parsep=0.5ex]
+    \item \textbf{技术博客：} \href{https://maksymilan.github.io/}{https://maksymilan.github.io/}
+    \item \textbf{GitHub：} \href{https://github.com/maksymilan}{https://github.com/maksymilan} 
+    \item \textbf{英语水平：} CET-4, CET-6
+\end{itemize}
 \end{document}
