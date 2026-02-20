@@ -1,6 +1,5 @@
 \documentclass[11pt]{article}
 
-
 \setlength{\parindent}{0pt}
 \usepackage{xltxtra}
 \usepackage{hyperref}
@@ -16,89 +15,80 @@
 \usepackage{fontspec}
 \usepackage{xeCJK}
 \usepackage{enumitem}
-\CJKsetecglue{} %% 取消中文与数字之间的间隙
-
+\CJKsetecglue{}
 
 %% 主文档字体设置
 \setmainfont[
     Path = fonts/Main/,
     Extension = .otf,
-    BoldFont = texgyretermes-bold.otf, % 加粗字体
-]{texgyretermes-regular.otf} % 正文字体
+    BoldFont = texgyretermes-bold.otf,
+]{texgyretermes-regular.otf}
 
 % 中文字体设置
 \setCJKmainfont[
     Path = fonts/hansans/,
     Extension = .ttf,
-    BoldFont = NotoSansSC-Bold.ttf, % 加粗字体
-]{NotoSansSC-Regular.otf} % 正文字体
-
+    BoldFont = NotoSansSC-Bold.ttf,
+]{NotoSansSC-Regular.otf}
 
 \usepackage{relsize}
 \usepackage{xspace}
+\usepackage{fontawesome}
 
-% 使用 fontawesome（部分图标）
-\usepackage{fontawesome} 
-
-% A4纸，上下左右边距
 \usepackage[
     a4paper,
     left=1.2cm,
     right=1.2cm,
-    top=1.5cm,
-    bottom=1cm,
+    top=1.3cm,
+    bottom=0.9cm,
     nohead
 ]{geometry}
 
-\renewcommand{\baselinestretch}{1.5} % 行间距设为1.5
+% ===== 行距压缩 =====
+\renewcommand{\baselinestretch}{1.15}
 
 \usepackage{titlesec}
-\usepackage{enumitem}
-\setlist{noitemsep} % 取消列表项间的额外间距
-%\setlist{nosep} % 取消所有垂直间距
-\setlist[itemize]{topsep=0.25em, leftmargin=*}
-\setlist[enumerate]{topsep=0.25em, leftmargin=*}
 
-% --- 用于控制【不同项目之间】的垂直距离 ---
+% ===== 列表压缩 =====
+\setlist{
+    itemsep=0.1em,
+    topsep=0.15em,
+    parsep=0pt,
+    partopsep=0pt,
+    leftmargin=*
+}
+
+% ===== 项目间距压缩 =====
 \newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.9em} % <--- 在此调整项目之间的距离
+\setlength{\interProjectSpacing}{0.45em}
 \newcommand{\projectsep}{\vspace{\interProjectSpacing}}
 
-% --- 用于控制【项目标题】与下方【项目描述】的距离 ---
 \newlength{\intraProjectTitleSep}
-\setlength{\intraProjectTitleSep}{0.4em} % <--- 在此调整标题和描述的距离
+\setlength{\intraProjectTitleSep}{0.2em}
 \newcommand{\titlebreak}{\\[\intraProjectTitleSep]}
 
-% --- 用于控制【项目描述】与下方【要点列表】的距离 ---
 \newlength{\intraProjectListTopSep}
-\setlength{\intraProjectListTopSep}{0.2em} % <--- 在此调整描述和列表的距离
+\setlength{\intraProjectListTopSep}{0.1em}
 
-% =======================================================================
-
-
-\titleformat{\section}         % 定制 \section 命令 
-{\large\bfseries\raggedright} % 将 section 标题设置为大号、粗体且左对齐
-{}{0em}                      % 可用于为所有 section 添加前缀（如“章节...”）
-{}                           % 可用于在标题前插入代码
-[{\color{CVBlue}\titlerule}]  % 在标题后插入一条横线
-\titlespacing*{\section}{0cm}{*1.6}{*1.2}
-
-
+% ===== section 间距压缩 =====
+\titleformat{\section}
+{\large\bfseries\raggedright}
+{}{0em}{}
+[{\color{CVBlue}\titlerule}]
+\titlespacing*{\section}{0cm}{0.6em}{0.4em}
 
 \begin{document}
 \pagenumbering{gobble}
 
-  %%%% 利用tikz来定位学校Logo，这里只在第一页显示
 \begin{tikzpicture}[remember picture, overlay] 
     \node[anchor = north west] at ($(current page.north west)+(0.5cm,+1.0cm)$) {\includegraphics[height=6cm]{zju.png}};
-\end{tikzpicture}%
+\end{tikzpicture}
 
 \centerline{\LARGE\bfseries{徐一啸}} 
-
 \centerline{\normalsize{\faEnvelopeO\ \href{mailto:3230100000@zju.edu.cn}{3250102927@zju.edu.cn}}} 
-    
+
 \section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育背景}    
-\textbf{浙江大学} \hfill 2023.9 -- 至今\\[0.2em] % 标题和正文间加一点距离
+\textbf{浙江大学} \hfill 2023.9 -- 至今\\[0.2em]
 大一 \quad GPA:4.45 
 \begin{itemize}[nosep]
     \item 现浙江大学超算队(ZJUSCT)成员
@@ -114,7 +104,6 @@
 
 \section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历(部分)}
 
-% --- 第一个项目 ---
 \textbf{基于Mediapipe的猜拳游戏} \hfill 2024.05 -- 2024.06 \titlebreak
 项目描述：项目灵感来源于高中时看到的一篇介绍 mediapipe 的技术博客。项目主要利用周末时间完成，在实现手势识别的基础上，又尝试增加了简易 UI 和联网功能，也是我对个人兴趣的初步探索。
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
@@ -125,7 +114,6 @@
 
 \projectsep
 
-% --- 第二个项目 ---
 \textbf{磁性计算体系优化} \hfill 2025.12 -- 至今 \titlebreak
 项目描述：复旦大学计算物质研究所与 ZJUSCT 的合作项目。主要目标是对目前主流的分子动力学模拟推理框架 nequip 和 allegro 进行科学计算优化和修改，解决大规模磁性原子体系的“维度危机”。我和另一位超算队同学作为主要的参与者负责了目前为止绝大部分的分析和优化工作，并在学期和寒假通过线上会议的形式对接进度和困难点。
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
@@ -134,14 +122,12 @@
     \item \textbf{优化尝试}: 调用开源项目的代码，针对矩阵稀疏性和内存传输开销问题采取稀疏计算优化和内核融合操作。尝试在模型推理的关键步骤上用 openMPI 做并行。
 \end{itemize}
 
-
 \section{\makebox[\widthof{\faInfo}][c]{\color{CVBlue}\faInfo}\ 个人优势}
 \begin{itemize}[nosep]
     \item \textbf{自主学习意识和能力}: 通过 d2l 自学图像训练数据处理，在 SJTU 夏令营的 ai 开发赛道中负责数据处理和预训练，带领团队获奖；自学基本开发工具和高性能计算知识，参与 HPC 校赛并获奖，通过面试遴选进入 ZJUSCT；寒假时自学代理软件配置知识，解决校网和科学上网工具冲突；假期通过 MIT opencourse 学习算法和数理基础知识，同时补全自己的英语术语库。
     \item \textbf{在生活中独立解决 CS 相关问题}: 主动关注硬件市场动态，研究硬件配置；主动装过机，平时会对笔记本清灰、涂硅脂；在使用过程中有意识地积累和运用有意思的工具，优化电脑整体性能。
     \item \textbf{保持好奇和自我更新}: 有定期阅读技术博客的习惯；平时喜欢听业界学界人物的访谈播客，了解前沿理论和工业界进展，对新知识新想法保持开放和持续学习的态度。
 \end{itemize}
-
 
 \section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 技术栈}
 \begin{itemize}[nosep]
