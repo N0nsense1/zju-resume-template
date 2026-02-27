@@ -115,12 +115,12 @@
 \section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历(部分)}
 
 % --- 第一个项目 ---
-\textbf{基于Mediapipe的猜拳游戏} \hfill 2024.05 -- 2024.06 \titlebreak
-项目描述：项目灵感来源于高中时看到的一篇介绍 mediapipe 的技术博客。项目主要利用周末时间完成，在实现手势识别的基础上，又尝试增加了简易 UI 和联网功能，也是我对个人兴趣的初步探索。
+\textbf{从零构建的basic编译器} \hfill 2024.05 -- 2024.06 \titlebreak
+项目描述：用python语言从零实现的一个编译器引擎，项目完全没有采用任何第三方库，从零实现了简单的basic语言编译器功能。实现了赋值，多级优先级运算，嵌套循环等功能。
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{数据采集}: \textbf{openCV} 提供了高度封装的视频流采集和转换功能，用笔记本的原生摄像头即可完成图像采集。
-    \item \textbf{手势识别}: \textbf{Mediapipe} 提供了预训练好的模型，将图像格式简单转换后传入推理框架即可进行推理。\textbf{Mediapipe} 会识别并输出一组坐标，对应手部各个“关键点”在图像中的位置。项目在一开始初步实现了手势判断逻辑。后续针对识别稳定性和手部大小不同的问题分别作了连续帧投票和手掌比例归一化的优化，在实际测试中表现较好。
-    \item \textbf{UI和联网功能}: 利用 \textbf{Gradio} 实现 UI，\textbf{Flask} 实现联网。二者都高度封装，即插即用，为项目提供轻量化实现。
+    \item \textbf{标准化编译器组件}: 按标准编译器后端架构实现了Tokenizer(分词器), Parser(语法分析器), Interpreter(解释器)等，与编译器标准后端结构一致。
+    \item \textbf{底层算法实现}: 利用简单的分词算法按照basic语法实现分词，利用递归下降算法和抽象语法树构造实现多级优先级计算。运算过程的数据和操作符利用node类高度封装，利于阅读、维护和扩展。
+    \item \textbf{嵌套符号表设计}: 利用嵌套符号表实现变量的作用域隔离，循环内定义的变量会在循环后自动销毁。
 \end{itemize}
 
 \projectsep
@@ -143,11 +143,12 @@
 \end{itemize}
 
 
-\section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 技术栈}
+\section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 知识背景}
 \begin{itemize}[nosep]
-    \item \textbf{编程语言}: Python, C++, C
-    \item \textbf{开发工具}: Git, SSH, Conda, GNUmake, Cmake
-    \item \textbf{操作系统}: Linux (fish shell)
+    \item \textbf{编程语言}: Python(相对熟练), C++, C
+    \item \textbf{开发工具}: Git, SSH, Conda, GNUmake, Cmake(掌握基础知识)
+    \item \textbf{操作系统}: Linux
+    \item \textbf{学习方向(目前)}: 科学计算优化(OpenMP, SIMD, CUDA), AI训练\推理加速(Pytorch，分布式训练)
 \end{itemize}
 
 \end{document}
