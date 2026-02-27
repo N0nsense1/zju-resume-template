@@ -115,12 +115,12 @@
 \section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历(部分)}
 
 % --- 第一个项目 ---
-\textbf{基于Mediapipe的猜拳游戏} \hfill 2024.05 -- 2024.06 \titlebreak
-个人项目，利用高中时周末时间独立完成。简单实现了基于手势识别模型的猜拳游戏。
+\textbf{从零构建的basic编译器} \hfill 2025.07 -- 2025.08 \titlebreak
+用python语言从零实现的一个编译器引擎，项目完全没有采用任何第三方库，从零实现了简单的basic语言编译器功能。实现了赋值，多级优先级运算，嵌套循环等功能。
 \begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{初步实现}: 利用OpenCV采集视频流，Mediapipe提取手部关键点，设计和优化手势判断逻辑并进行测试。
-    \item \textbf{进一步优化}: 针对识别稳定性问题，引入连续帧投票机制；针对手部尺度差异，实现手掌比例归一化。
-    \item \textbf{UI和联网功能}: 使用Gradio构建简易UI，并通过Flask实现本地联网功能，项目在小型测试中稳定运行。
+    \item \textbf{标准化的编译器组件}: 按标准编译器后端架构实现了Tokenizer(分词器), Parser(语法分析器), Interpreter(解释器)
+    \item \textbf{底层算法实现}: 利用递归下降算法和抽象语法树构造实现多级优先级计算。利用node类高度封装，利于阅读、维护和扩展。
+    \item \textbf{嵌套符号表设计}: 利用嵌套符号表实现变量的作用域隔离，循环内定义的变量会在循环后自动销毁。
 \end{itemize}
 
 \projectsep
@@ -143,11 +143,12 @@
 \end{itemize}
 
 
-\section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 技术栈}
+\section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 知识背景}
 \begin{itemize}[nosep]
-    \item \textbf{编程语言}: Python, C++, C
-    \item \textbf{开发工具}: Git, SSH, Conda, GNUmake, Cmake
+    \item \textbf{编程语言}: Python(相对熟练), C, C++
+    \item \textbf{开发工具}: Git, SSH, Conda, GNUmake, Cmake(只掌握基础知识)
     \item \textbf{操作系统}: Linux
+    \item \textbf{学习方向(目前)}: 科学计算优化(OpenMP, SIMD, CUDA), AI训练\推理加速(Pytorch，分布式训练)
 \end{itemize}
 
 \end{document}
